@@ -127,8 +127,12 @@ func (s *VaultStore) GetContextPrefix(path string) string {
 		return ""
 	}
 
+	if s.GetStoreConfig().ID != nil {
+		return *s.GetStoreConfig().ID
+	}
+
 	// for vault, the secret name itself contains the semantic information (not the key of the kv-pair of the vault secret)
-	return filepath.Base(path)
+	return string(types.StoreKindVault)
 }
 
 func (s *VaultStore) GetKind() types.StoreKind {
