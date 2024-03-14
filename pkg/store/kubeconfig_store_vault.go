@@ -286,7 +286,7 @@ func (s *VaultStore) GetKubeconfigForPath(path string, _ map[string]string) ([]b
 
 	if s.EngineVersion == "v1" {
 		for secretKey, data := range secret.Data {
-			matched, err := filepath.Match(s.KubeconfigName, secretKey)
+			matched, err := filepath.Match(s.VaultKeyKubeconfig, secretKey)
 			if err != nil {
 				return nil, err
 			}
